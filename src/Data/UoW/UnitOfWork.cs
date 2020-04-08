@@ -11,12 +11,23 @@ namespace CoronaAPI.src.Data.UoW
 
         private IRepository<ConfigurationSystem> _respositoryConfiguration;
 
+        private ConfigurationSystem _configurationSystem;
+
         public UnitOfWork(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        public IRepository<ConfigurationSystem> ConfigurationSystem
+        public ConfigurationSystem ConfigurationSystem
+        {
+            get
+            {
+                return _configurationSystem ??
+                    (_configurationSystem = new ConfigurationRepository(_configuration).GetFirst());
+            }
+        }
+        
+        public IRepository<ConfigurationSystem> RepositoryConfigurationSystem
         {
             get
             {

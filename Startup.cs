@@ -1,6 +1,7 @@
 using System;
 using CoronaAPI.Data;
 using CoronaAPI.Data.Repository;
+using CoronaAPI.src.Data.UoW;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,7 +35,8 @@ namespace CoronaAPI
             services.AddControllers();
 
             services.AddTransient<IRepository<ConfigurationSystem>, ConfigurationRepository>();
-            
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             // Register the Swagger generator
             services.AddSwaggerGen(c =>
             {
